@@ -28,6 +28,6 @@
     "url": "https://github.com/catpawx/icons/issues"
   },
   "dependencies": {
-    "@catpawx/monorepo-b": "workspace:*"
+    
   }
 }
