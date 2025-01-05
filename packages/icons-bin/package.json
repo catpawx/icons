@@ -1,13 +1,12 @@
 {
-  "name": "@catpawx/monorepo-a",
-  "version": "0.0.2",
-  "description": "🐾 猫爪联盟前端团队 monorepo-a",
+  "name": "@catpawx/icons-bin",
+  "version": "0.0.1",
+  "description": "🐾 猫爪联盟前端团队 icons-bin",
   "authors": [
     "相甫 <xiangfu_git@163.com>"
   ],
   "homepage": "https://github.com/catpawx/icons#readme",
   "license": "ISC",
-  "type": "module",
   "main": "index.js",
   "directories": {},
   "files": [
@@ -28,6 +27,18 @@
     "url": "https://github.com/catpawx/icons/issues"
   },
   "dependencies": {
-    
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "figma-js": "^1.11.0",
+    "fs-extra": "^9.0.1",
+    "got": "^11.5.1",
+    "p-queue": "2.4.2",
+    "prettier-eslint": "^9.0.0",
+    "svgo": "^3.3.2",
+    "uppercamelcase": "^3.0.0",
+    "eslint": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4"
   }
 }

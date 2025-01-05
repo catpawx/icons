@@ -1,8 +1,8 @@
-import { count } from '@catpawx/monorepo-b'
-
+// import { fetchSvg } from './fetch-svg'
+import { generateIcons } from './generate-icons'
 function init() {
-  const res = count(1, 2)
-  console.log('🚀🚀🚀======>>>res', res)
+  // fetchSvg()
+  generateIcons()
 }
 
 init()
