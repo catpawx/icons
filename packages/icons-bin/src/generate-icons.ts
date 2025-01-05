@@ -7,7 +7,7 @@ import path from 'path'
 // import iconsData from '../.icons/data.json'
 import { defaultStyle } from './config'
 import processSvg from './process-svg'
-import { getAttrs, getElementCode } from './template'
+import { getAttrs, getElementCode, getStyles, getTypes } from './template'
 import { copy, parseName } from './utils'
 
 interface Icon {
@@ -27,8 +27,6 @@ const rootDir = path.resolve()
 const srcDir = path.join(rootDir, '.icons')
 const iconsDir = path.join(rootDir, '.icons/icons')
 const iconsIndexFile = path.join(rootDir, '.icons', 'index.ts')
-const stylesFile = path.join(rootDir, 'src/styles.ts')
-const typesFile = path.join(rootDir, 'src/types.ts')
 const iconsJsonFile = path.join(rootDir, '.icons/data.json')
 
 // generate icons.js and icons.d.ts file
@@ -150,9 +148,9 @@ export const copyIconsToOutput = () => {
   const outputStylesFile = path.join(outputDir, 'styles.ts')
   const outputTypesFile = path.join(outputDir, 'types.ts')
   copy(iconsDir, path.join(outputDir, 'icons'))
-  copy(stylesFile, outputStylesFile)
-  copy(typesFile, outputTypesFile)
   copy(iconsIndexFile, outputiconsIndexFile)
+  fs.writeFileSync(outputStylesFile, getStyles(), 'utf-8')
+  fs.writeFileSync(outputTypesFile, getTypes(), 'utf-8')
   // 删除 .icons 目录
   fs.rmSync(srcDir, { recursive: true })
 }

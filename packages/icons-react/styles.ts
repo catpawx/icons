@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-ignore
 import type React from 'react'
-
 export const spanStyles: React.CSSProperties = {
   display: 'inline-flex',
   alignItems: 'center',

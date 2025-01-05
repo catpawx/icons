@@ -94,3 +94,31 @@ export const getElementCode = (
   export default ${ComponentName}
 `
 }
+
+export const getStyles = () => {
+  return `import type React from 'react'
+export const spanStyles: React.CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  color: 'inherit',
+  fontStyle: 'normal',
+  lineHeight: 0,
+  textAlign: 'center',
+  textTransform: 'none',
+  verticalAlign: '-0.125em',
+  textRendering: 'optimizeLegibility',
+}
+`
+}
+export const getTypes = () => {
+  return `import type React from 'react'
+export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
+  color?: string
+  size?: string | number
+  rotate?: number
+  style?: React.CSSProperties
+  className?: string
+  colors?: string[]
+}
+  `
+}

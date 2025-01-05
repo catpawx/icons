@@ -52,6 +52,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^19.0.2",
     "commitizen": "^4.3.0",
     "cz-git": "^1.9.3",
     "eslint": "^8.12.0",
@@ -63,5 +64,8 @@
     "rollup-plugin-dts": "^6.1.1",
     "tslib": "^2.6.2",
     "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "react": "^19.0.0"
   }
 }
