@@ -23,3 +23,6 @@ dist-ssr
 *.sw?
 
 .env*
+.dumi/tmp
+.dumi/tmp-test
+.dumi/tmp-production

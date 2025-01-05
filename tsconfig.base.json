@@ -25,7 +25,8 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "paths": {
-      "@catpawx/*": ["packages/*/src"]
+      "@catpawx/*": ["packages/*"]
+      // "@catpawx/icons-react": ["./packages/icons-react"]
     }
   }
 }

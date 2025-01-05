@@ -25,6 +25,7 @@
     "clean": "rimraf packages/**/node_modules && rimraf node_modules",
     "build:debug": "rimraf packages/**/dist && rollup -c ./rollup.config.dev.cjs",
     "build": "rimraf packages/**/dist && rollup -c",
+    "doc:dev": "dumi dev",
     "commit": "git-cz",
     "changeset": "changeset",
     "version": "changeset version",
@@ -52,7 +53,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^19.0.2",
+    "@types/react": "^18.2.79",
     "commitizen": "^4.3.0",
     "cz-git": "^1.9.3",
     "eslint": "^8.12.0",
@@ -63,9 +64,11 @@
     "rollup": "^4.17.2",
     "rollup-plugin-dts": "^6.1.1",
     "tslib": "^2.6.2",
-    "typescript": "5.4.5"
-  },
-  "dependencies": {
-    "react": "^19.0.0"
+    "typescript": "5.4.5",
+    "dumi": "^2.2.17",
+    "react": "^18.2.0",
+    "antd": "^5.16.2",
+    "babel-plugin-import": "^1.13.8",
+    "copy-to-clipboard": "^3.3.3"
   }
 }
