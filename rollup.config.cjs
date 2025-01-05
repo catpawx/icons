@@ -14,7 +14,7 @@ function output(path) {
   const output = []
   if (path.includes('bin')) {
     output.push({
-      file: `./packages/${path}/dist/index.js`,
+      file: `./packages/${path}/dist/index.cjs`,
       format: 'cjs',
       sourcemap: true,
     })

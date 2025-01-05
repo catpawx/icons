@@ -4,10 +4,11 @@ import path from 'path'
 
 // @ts-ignore
 // import format from 'prettier-eslint'
-import iconsData from '../.icons/data.json'
+// import iconsData from '../.icons/data.json'
+import { defaultStyle } from './config'
 import processSvg from './process-svg'
 import { getAttrs, getElementCode } from './template'
-import { parseName } from './utils'
+import { copy, parseName } from './utils'
 
 interface Icon {
   name: string
@@ -20,14 +21,15 @@ interface Icon {
   image: string
 }
 
-const icons: { [key: string]: Icon } = iconsData
-const defaultStyle = process.env.npm_package_config_style || 'stroke'
-
 const rootDir = path.resolve()
 
 // where icons code in
 const srcDir = path.join(rootDir, '.icons')
 const iconsDir = path.join(rootDir, '.icons/icons')
+const iconsIndexFile = path.join(rootDir, '.icons', 'index.ts')
+const stylesFile = path.join(rootDir, 'src/styles.ts')
+const typesFile = path.join(rootDir, 'src/types.ts')
+const iconsJsonFile = path.join(rootDir, '.icons/data.json')
 
 // generate icons.js and icons.d.ts file
 const generateIconsIndex = () => {
@@ -38,32 +40,20 @@ const generateIconsIndex = () => {
     fs.mkdirSync(iconsDir)
   }
 
-  const initialTypeDefinitions = `/// <reference types="react" />
-  import { ComponentType, SVGAttributes } from 'react';
-
-  interface Props extends SVGAttributes<SVGElement> {
-    color?: string;
-    size?: string | number;
-  }
-
-  type Icon = ComponentType<Props>;
-  `
-
-  fs.writeFileSync(path.join(rootDir, '.icons', 'icons.js'), '', 'utf-8')
-  fs.writeFileSync(
-    path.join(rootDir, '.icons', 'icons.d.ts'),
-    initialTypeDefinitions,
-    'utf-8',
-  )
+  fs.writeFileSync(iconsIndexFile, '', 'utf-8')
 }
 
 // generate attributes code
-const attrsToString = (attrs: { [key: string]: string }, style: string) => {
-  console.log('style: ', style)
+const attrsToString = (attrs: { [key: string]: string }) => {
   return Object.keys(attrs)
     .map((key: any) => {
       // should distinguish fill or stroke
-      if (key === 'width' || key === 'height' || key === style) {
+      if (
+        key === 'width' ||
+        key === 'height' ||
+        key === 'fill' ||
+        key === 'stroke'
+      ) {
         return key + '={' + attrs[key] + '}'
       }
       if (key === 'otherProps') {
@@ -79,13 +69,13 @@ const generateIconCode = async ({ name }: { name: any }) => {
   const names = parseName(name, defaultStyle)
   console.log(names)
   const location = path.join(rootDir, '.icons/svg', `${names.name}.svg`)
-  const destination = path.join(rootDir, '.icons/icons', `${names.name}.js`)
+  const destination = path.join(rootDir, '.icons/icons', `${names.name}.tsx`)
   const code: any = fs.readFileSync(location)
-  const svgCode = await processSvg(code)
+  const svgCode = await processSvg(code, names)
   const ComponentName = names.componentName
   const element = getElementCode(
     ComponentName,
-    attrsToString(getAttrs(names.style), names.style),
+    attrsToString(getAttrs(names)),
     svgCode,
   )
   // const component = format({
@@ -107,7 +97,7 @@ const generateIconCode = async ({ name }: { name: any }) => {
   return { ComponentName, name: names.name }
 }
 
-// append export code to icons.js
+// append export code to index.ts
 const appendToIconsIndex = ({
   ComponentName,
   name,
@@ -116,28 +106,53 @@ const appendToIconsIndex = ({
   name: string
 }) => {
   const exportString = `export { default as ${ComponentName} } from './icons/${name}';\r\n`
-  fs.appendFileSync(
-    path.join(rootDir, '.icons', 'icons.js'),
-    exportString,
-    'utf-8',
-  )
-
-  const exportTypeString = `export const ${ComponentName}: Icon;\n`
-  fs.appendFileSync(
-    path.join(rootDir, '.icons', 'icons.d.ts'),
-    exportTypeString,
-    'utf-8',
-  )
+  fs.appendFileSync(iconsIndexFile, exportString, 'utf-8')
 }
 
+/** 生成图标 */
 export const generateIcons = () => {
+  const icons: { [key: string]: Icon } = loadLocalJson()
   generateIconsIndex()
 
-  Object.keys(icons)
+  // Object.keys(icons)
+  // .map(key => icons[key])
+  // .forEach(({ name }) => {
+  //   generateIconCode({ name }).then(({ ComponentName, name }) => {
+  //     appendToIconsIndex({ ComponentName, name })
+  //   })
+  // })
+
+  const tasks = Object.keys(icons)
     .map(key => icons[key])
-    .forEach(({ name }) => {
-      generateIconCode({ name }).then(({ ComponentName, name }) => {
-        appendToIconsIndex({ ComponentName, name })
+    .map(({ name }) => {
+      return generateIconCode({ name }).then(({ ComponentName, name }) => {
+        return appendToIconsIndex({ ComponentName, name })
       })
     })
+
+  Promise.all(tasks).then(() => {
+    copyIconsToOutput()
+  })
+  // 将上面的异步任务执行后，将 icons 复制到指定目录
+}
+
+/** 加载本地的json数据 */
+export const loadLocalJson = () => {
+  return JSON.parse(fs.readFileSync(iconsJsonFile, 'utf-8'))
+}
+
+/** 将资源复制到指定目录 */
+export const copyIconsToOutput = () => {
+  const { OUTPUT_DIR } = process.env
+  // 将 styles.ts 和types.ts 复制到 .icons 目录下
+  const outputDir = path.join(rootDir, OUTPUT_DIR || '')
+  const outputiconsIndexFile = path.join(outputDir, 'index.ts')
+  const outputStylesFile = path.join(outputDir, 'styles.ts')
+  const outputTypesFile = path.join(outputDir, 'types.ts')
+  copy(iconsDir, path.join(outputDir, 'icons'))
+  copy(stylesFile, outputStylesFile)
+  copy(typesFile, outputTypesFile)
+  copy(iconsIndexFile, outputiconsIndexFile)
+  // 删除 .icons 目录
+  fs.rmSync(srcDir, { recursive: true })
 }

@@ -23,6 +23,7 @@
     "lint:ts": "tsc --noEmit && eslint packages --ext .ts,.tsx",
     "prettier": "prettier --write 'packages/**/*.{js,json,yml,yaml,css,scss,less,ts,tsx,md}'",
     "clean": "rimraf packages/**/node_modules && rimraf node_modules",
+    "build:debug": "rimraf packages/**/dist && rollup -c ./rollup.config.dev.cjs",
     "build": "rimraf packages/**/dist && rollup -c",
     "commit": "git-cz",
     "changeset": "changeset",

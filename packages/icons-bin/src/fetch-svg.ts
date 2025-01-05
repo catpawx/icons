@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import dotenv from 'dotenv'
+
 import * as Figma from 'figma-js'
 import { ensureDir, writeFile } from 'fs-extra'
 import got from 'got'
@@ -7,8 +7,7 @@ import got from 'got'
 import PQueue from 'p-queue'
 import { join, resolve } from 'path'
 
-export function fetchSvg() {
-  dotenv.config()
+export async function fetchSvg() {
   const { FIGMA_TOKEN, FIGMA_FILE_URL } = process.env
 
   const options: any = {
@@ -43,9 +42,8 @@ export function fetchSvg() {
   const fileId = match[1]
 
   console.log(`Exporting ${FIGMA_FILE_URL} components`)
-  client
+  return await client
     .file(fileId)
-
     .then(({ data }) => {
       console.log('Processing response')
       const components: any = {}
