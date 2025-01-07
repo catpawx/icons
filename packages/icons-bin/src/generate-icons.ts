@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 
-// import format from 'prettier-eslint'
 import { defaultStyle, TEMP_DIR } from './config'
 import processSvg from './process-svg'
 import { getAttrs, getElementCode, getStyles, getTypes } from './template'
@@ -31,7 +30,7 @@ const iconsIndexFile = path.join(tempDir, 'index.ts')
 /** 生成的 data.json 文件 */
 const iconsJsonFile = path.join(tempDir, 'data.json')
 
-// generate icons.js and icons.d.ts file
+/** 生成 icons.js  icons.d.ts 文件 */
 const generateIconsIndex = () => {
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir)
@@ -64,7 +63,7 @@ const attrsToString = (attrs: { [key: string]: string }) => {
     .join(' ')
 }
 
-// generate icon code separately
+/** 生成图标code */
 const generateIconCode = async ({ name }: { name: any }) => {
   const names = parseName(name, defaultStyle)
   console.log(names)
@@ -73,23 +72,11 @@ const generateIconCode = async ({ name }: { name: any }) => {
   const code: any = fs.readFileSync(location)
   const svgCode = await processSvg(code, names)
   const ComponentName = names.componentName
-  const element = getElementCode(
+  const component = getElementCode(
     ComponentName,
     attrsToString(getAttrs(names)),
     svgCode,
   )
-  // const component = format({
-  //   text: element,
-  //   eslintConfig: {
-  //     extends: 'airbnb',
-  //   },
-  //   prettierOptions: {
-  //     bracketSpacing: true,
-  //     singleQuote: true,
-  //     parser: 'flow',
-  //   },
-  // })
-  const component = element
 
   fs.writeFileSync(destination, component, 'utf-8')
 
@@ -144,7 +131,7 @@ export const generateIcons = () => {
     })
 
   Promise.all(tasks).then(() => {
+    // 将上面的异步任务执行后，将 icons 复制到指定目录
     copyIconsToOutput()
   })
-  // 将上面的异步任务执行后，将 icons 复制到指定目录
 }

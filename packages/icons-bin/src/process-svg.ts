@@ -1,39 +1,31 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as cheerio from 'cheerio'
-// @ts-ignore
+import type { PluginConfig } from 'svgo'
 import { optimize as svgoOptimize } from 'svgo'
 
 import { STYLESKEY } from './config'
+import { camelCase } from './utils'
 
 /**
- * Convert string to CamelCase.
- * @param {string} str - A string.
- * @returns {string}
- */
-function CamelCase(str: string): string {
-  return str.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase())
-}
-
-/**
- * Optimize SVG with `svgo`.
- * @param {string} svg - An SVG string.
+ * 用svgo优化SVG
+ * @param {string} svg
  * @returns {Promise<string>}
  */
 function optimize(svg: string, names: any): Promise<string> {
   const { style } = names
-  const plugins: any = [
+  // 插件
+  let plugins: PluginConfig[] = [
     {
       name: 'removeXlink',
     },
   ]
   // fill填充、stroke描边才需要的插件
-  if (style === STYLESKEY.OUTLINED) {
-    plugins.concat([
+  if (style === STYLESKEY.OUTLINED || style === STYLESKEY.FILLED) {
+    plugins = plugins.concat([
       {
         name: 'preset-default',
         params: {
           overrides: {
-            converShapeToPath: false,
+            convertShapeToPath: false,
             mergePaths: false,
           },
         },
@@ -42,7 +34,7 @@ function optimize(svg: string, names: any): Promise<string> {
         name: 'removeAttrs',
         params: {
           elemSeparator: ',',
-          attrs: ['fill', 'stroke'],
+          attrs: ['stroke', 'fill'],
         },
       },
     ])
@@ -57,8 +49,8 @@ function optimize(svg: string, names: any): Promise<string> {
 }
 
 /**
- * remove SVG element.
- * @param {string} svg - An SVG string.
+ * 移除SVG元素.
+ * @param {string} svg
  * @returns {string}
  */
 function removeSVGElement(svg: string): string {
@@ -75,8 +67,8 @@ function handleTwoTone(svg: string, names: any) {
   if (names.style === STYLESKEY.TWOTONE) {
     // 储存color
     const colorMap = new Map()
-    svg = svg.replace(/fill="(#[A-z0-9]{6})"/g, (_, a, b) => {
-      // 判断colorMap中是否存在该颜色
+    svg = svg.replace(/(fill)="(#[A-z0-9]{6})"/g, (_, a, b) => {
+      // 判断colorMap中是否有该颜色
       if (!colorMap.has(b)) {
         const size = colorMap.size
         colorMap.set(b, size)
@@ -86,19 +78,20 @@ function handleTwoTone(svg: string, names: any) {
       }
     })
   }
+
   return svg
 }
 
 /**
- * Process SVG string.
- * @param {string} svg - An SVG string.
+ * 处理SVG字符串
+ * @param {string} svg
  * @param {Promise<string>}
  */
 async function processSvg(svg: string, names: any) {
   const optimized = await optimize(svg, names)
     .then(removeSVGElement)
     .then(svg =>
-      svg.replace(/([a-z]+)-([a-z]+)=/g, (_, a, b) => `${a}${CamelCase(b)}=`),
+      svg.replace(/([a-z]+)-([a-z]+)=/g, (_, a, b) => `${a}${camelCase(b)}=`),
     )
     .then(svg => {
       // 处理two-tone图标

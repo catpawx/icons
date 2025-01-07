@@ -7,6 +7,8 @@ import got from 'got'
 import PQueue from 'p-queue'
 import { join, resolve } from 'path'
 
+import { PATH_LIST } from './config'
+
 export async function fetchSvg() {
   const { FIGMA_TOKEN, FIGMA_FILE_URL } = process.env
 
@@ -35,11 +37,11 @@ export async function fetchSvg() {
     throw Error('Cannot find FIGMA_FILE_URL key in process!')
   }
 
-  const match = FIGMA_FILE_URL.match(/file\/([a-z0-9]+)\//i)
+  const match = FIGMA_FILE_URL.match(/(file|design)\/([a-z0-9]+)\//i)
   if (!match) {
     throw new Error('Invalid FIGMA_FILE_URL format')
   }
-  const fileId = match[1]
+  const fileId = match[2]
 
   console.log(`Exporting ${FIGMA_FILE_URL} components`)
   return await client
@@ -68,7 +70,26 @@ export async function fetchSvg() {
         }
       }
 
-      data.document.children.forEach(check)
+      // 根据path路径查找
+      function pathFilter(c: any, pathName?: string) {
+        if (pathName === undefined) {
+          check(c)
+        } else {
+          if (c.name.includes(pathName)) {
+            const pName = PATH_LIST.shift()
+            c.children.forEach((c: any) => {
+              pathFilter(c, pName)
+            })
+          }
+        }
+      }
+
+      const pathName = PATH_LIST?.shift()
+      // data.document.children根据path路径，路径长度不定查找
+      data.document.children.forEach(c => {
+        pathFilter(c, pathName)
+      })
+
       if (Object.values(components).length === 0) {
         throw Error('No components found!')
       }

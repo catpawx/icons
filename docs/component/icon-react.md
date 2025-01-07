@@ -1,5 +1,5 @@
 ---
-title: web 图标
+title: react 图标
 order: 1
 nav:
   title: 组件
@@ -38,12 +38,16 @@ export default () => {
 
 ## 线框风格
 
-<code compact inline src="./icon-web/outline.tsx"></code>
+<code compact inline src="./icon-react/Outlined.tsx"></code>
 
 ## 实底风格
 
-<code compact inline src="./icon-web/fill.tsx"></code>
+<code compact inline src="./icon-react/Filled.tsx"></code>
+
+## 双色风格
+
+<code compact inline src="./icon-react/TwoTone.tsx"></code>
 
 ## 多彩风格
 
-<code compact inline src="./icon-web/colours.tsx"></code>
+<code compact inline src="./icon-react/MultiTone.tsx"></code>

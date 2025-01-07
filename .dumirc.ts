@@ -53,7 +53,7 @@ export default defineConfig({
       },
       {
         title: 'Icon',
-        link: '/component/icon-app',
+        link: '/component/icon-react',
       },
     ],
   },

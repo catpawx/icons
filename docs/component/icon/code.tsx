@@ -6,15 +6,16 @@ import STYLES from './style.module.less'
 
 interface Icon {
   name: string
-  Component: React.FC<{ color?: string }>
+  Component: React.FC<{ color?: string; colors?: string[] }>
 }
 
 interface CodeProps {
   icons: Icon[]
-  currentColor?: boolean
+  currentColor?: string
+  currentColors?: string[]
 }
 
-const Code: React.FC<CodeProps> = ({ icons, currentColor }) => {
+const Code: React.FC<CodeProps> = ({ icons, currentColor, currentColors }) => {
   const genOnClick = (c: string) => () => {
     const code = `<${c} />`
 
@@ -41,7 +42,7 @@ const Code: React.FC<CodeProps> = ({ icons, currentColor }) => {
             className={STYLES.item}
             onClick={genOnClick(icon.name)}>
             <span className={STYLES.icon}>
-              <icon.Component color={currentColor ? undefined : '#098'} />
+              <icon.Component color={currentColor} colors={currentColors} />
             </span>
             <p>{icon.name}</p>
           </Col>
