@@ -7,8 +7,6 @@ import got from 'got'
 import PQueue from 'p-queue'
 import { join, resolve } from 'path'
 
-import { PATH_LIST } from './config'
-
 export async function fetchSvg() {
   const { FIGMA_TOKEN, FIGMA_FILE_URL } = process.env
 
@@ -70,6 +68,8 @@ export async function fetchSvg() {
         }
       }
 
+      const { FIGMA_PATH_LIST } = process.env
+      const PATH_LIST = FIGMA_PATH_LIST?.split('/') || []
       // 根据path路径查找
       function pathFilter(c: any, pathName?: string) {
         if (pathName === undefined) {
@@ -84,7 +84,7 @@ export async function fetchSvg() {
         }
       }
 
-      const pathName = PATH_LIST?.shift()
+      const pathName = PATH_LIST.shift()
       // data.document.children根据path路径，路径长度不定查找
       data.document.children.forEach(c => {
         pathFilter(c, pathName)

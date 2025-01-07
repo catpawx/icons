@@ -4,6 +4,7 @@ import path from 'path'
 import { defaultStyle, TEMP_DIR } from './config'
 import processSvg from './process-svg'
 import { getAttrs, getElementCode, getStyles, getTypes } from './template'
+import { getElementCodeRN } from './templateRN'
 import { copy, parseName } from './utils'
 
 interface Icon {
@@ -72,11 +73,22 @@ const generateIconCode = async ({ name }: { name: any }) => {
   const code: any = fs.readFileSync(location)
   const svgCode = await processSvg(code, names)
   const ComponentName = names.componentName
-  const component = getElementCode(
-    ComponentName,
-    attrsToString(getAttrs(names)),
-    svgCode,
-  )
+  // 如果是react-native
+  const { OUTPUT_TYPE } = process.env
+  let component = ''
+  if (OUTPUT_TYPE === 'react-native') {
+    component = getElementCodeRN(
+      ComponentName,
+      attrsToString(getAttrs(names)),
+      svgCode,
+    )
+  } else {
+    component = getElementCode(
+      ComponentName,
+      attrsToString(getAttrs(names)),
+      svgCode,
+    )
+  }
 
   fs.writeFileSync(destination, component, 'utf-8')
 
@@ -114,7 +126,7 @@ export const copyIconsToOutput = () => {
   fs.writeFileSync(outputStylesFile, getStyles(), 'utf-8')
   fs.writeFileSync(outputTypesFile, getTypes(), 'utf-8')
   // 删除临时目录
-  fs.rmSync(tempDir, { recursive: true })
+  // fs.rmSync(tempDir, { recursive: true })
 }
 
 /** 生成图标 */
