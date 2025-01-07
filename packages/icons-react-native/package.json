@@ -1,7 +1,7 @@
 {
-  "name": "@catpawx/monorepo-a",
-  "version": "0.0.2",
-  "description": "🐾 猫爪联盟前端团队 monorepo-a",
+  "name": "@catpawx/icons-react-native",
+  "version": "0.0.1",
+  "description": "🐾 猫爪联盟前端团队 react-native 图标",
   "authors": [
     "相甫 <xiangfu_git@163.com>"
   ],
@@ -27,7 +27,13 @@
   "bugs": {
     "url": "https://github.com/catpawx/icons/issues"
   },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-svg": ">=12.4.1"
+  },
   "dependencies": {
-    
+    "@babel/runtime": "*",
+    "lodash": "*"
   }
 }

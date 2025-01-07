@@ -24,9 +24,9 @@ export default defineConfig({
     '@catpawx/icons-react': path.resolve(__dirname, './packages/icons-react'),
     '@catpawx/icons-react-native': path.resolve(
       __dirname,
-      './packages/icons-react-native/src',
+      './packages/icons-react-native',
     ),
-    '@catpawx/icons-taro': path.resolve(__dirname, './packages/icons-taro/src'),
+    '@catpawx/icons-taro': path.resolve(__dirname, './packages/icons-taro'),
   },
   extraBabelPlugins: [
     [

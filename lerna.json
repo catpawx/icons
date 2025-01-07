@@ -1,0 +1,12 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "ignoreChanges": ["**/test/**", "**/__tests__/**"],
+      "message": "chore(release): publish",
+      "registry": "https://registry.npmjs.org",
+      "access": "public"
+    }
+  }
+}
