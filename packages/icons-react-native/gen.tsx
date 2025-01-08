@@ -20,14 +20,14 @@ export interface IconCommonProps extends SvgProps {
 
   /**
    * 图片颜色
-   * @default '#5A6068'
+   * @default '#1677ff'
    */
   color?: ColorValue
 
   /**
-   * Outline 的路径宽
+   * 颜色列表
    */
-  strokeWidth?: number
+  colors?: ColorValue[]
 
   /**
    * svg 内部的样式
@@ -41,14 +41,8 @@ export interface IconCommonProps extends SvgProps {
   touchableSize?: number
 }
 
-export type IconOutlineProps = IconCommonProps
-
-export type IconFillProps = Omit<IconCommonProps, 'strokeWidth'>
-
-export type IconColoursProps = Omit<IconCommonProps, 'color'>
-
 type IconRender = (
-  config: { size: number; color?: ColorValue; strokeWidth?: number },
+  config: { size: number; color: ColorValue; colors: ColorValue[] },
   props: ViewProps,
 ) => React.ReactElement
 
@@ -99,14 +93,14 @@ export const omitTouchablePropsField = (props: ViewProps) => {
 }
 
 /**
- * 生成一个 Outline 类型的 icon 组件
+ * 生成一个 icon 组件
  */
 export const genIcon = (render: IconRender): React.FC<IconCommonProps> => {
   return memo(
     ({
       size = 24,
-      color = '#5A6068',
-      strokeWidth,
+      color = '#1677ff',
+      colors = [color, '#1677ff33'],
       svgStyle,
       touchableSize = 44,
 
@@ -147,7 +141,7 @@ export const genIcon = (render: IconRender): React.FC<IconCommonProps> => {
               {
                 color,
                 size,
-                strokeWidth,
+                colors,
               },
               {
                 style: _svgStyle,
@@ -160,14 +154,3 @@ export const genIcon = (render: IconRender): React.FC<IconCommonProps> => {
     },
   )
 }
-
-export const genFillIcon = (render: IconRender): React.FC<IconFillProps> =>
-  genIcon(render)
-
-export const genOutlineIcon = (
-  render: IconRender,
-): React.FC<IconOutlineProps> => genIcon(render)
-
-export const genColoursIcon = (
-  render: IconRender,
-): React.FC<IconColoursProps> => genIcon(render)

@@ -4,7 +4,7 @@ import path from 'path'
 import { defaultStyle, TEMP_DIR } from './config'
 import processSvg from './process-svg'
 import { getAttrs, getElementCode, getStyles, getTypes } from './template'
-import { getElementCodeRN } from './templateRN'
+import { genIconRN, getElementCodeRN } from './templateRN'
 import { copy, parseName } from './utils'
 
 interface Icon {
@@ -115,16 +115,23 @@ export const loadLocalJson = () => {
 
 /** 将资源复制到指定目录 */
 export const copyIconsToOutput = () => {
-  const { OUTPUT_DIR } = process.env
+  const { OUTPUT_DIR, OUTPUT_TYPE } = process.env
   // 将 styles.ts 和types.ts 复制到 输出目录下
   const outputDir = path.join(rootDir, OUTPUT_DIR || '')
   const outputiconsIndexFile = path.join(outputDir, 'index.ts')
-  const outputStylesFile = path.join(outputDir, 'styles.ts')
-  const outputTypesFile = path.join(outputDir, 'types.ts')
+
   copy(iconsDir, path.join(outputDir, 'icons'))
   copy(iconsIndexFile, outputiconsIndexFile)
-  fs.writeFileSync(outputStylesFile, getStyles(), 'utf-8')
-  fs.writeFileSync(outputTypesFile, getTypes(), 'utf-8')
+  if (OUTPUT_TYPE === 'react-native') {
+    const outputGenFile = path.join(outputDir, 'gen.tsx')
+    fs.writeFileSync(outputGenFile, genIconRN(), 'utf-8')
+  } else {
+    const outputStylesFile = path.join(outputDir, 'styles.ts')
+    const outputTypesFile = path.join(outputDir, 'types.ts')
+    fs.writeFileSync(outputStylesFile, getStyles(), 'utf-8')
+    fs.writeFileSync(outputTypesFile, getTypes(), 'utf-8')
+  }
+
   // 删除临时目录
   // fs.rmSync(tempDir, { recursive: true })
 }

@@ -68,16 +68,22 @@ export default () => {
 
 > 支持 `size`、`color`、`strokeWidth` 自定义属性。
 
-<code compact inline src="./icon-react-native/outline.tsx"></code>
+<code compact inline src="./icon-react-native/Outlined.tsx"></code>
 
-<!-- ## 实底风格
+## 实底风格
 
 > 支持 `size`、`color` 自定义属性。
 
-<code compact inline src="./icon-app/fill.tsx"></code>
+<code compact inline src="./icon-react-native/Filled.tsx"></code>
+
+## 双色风格
+
+> 支持 `size`、`color` 自定义属性。
+
+<code compact inline src="./icon-react-native/TwoTone.tsx"></code>
 
 ## 多彩风格
 
 > 支持 `size` 自定义属性。
 
-<code compact inline src="./icon-app/colours.tsx"></code> -->
+<code compact inline src="./icon-react-native/MultiTone.tsx"></code>
