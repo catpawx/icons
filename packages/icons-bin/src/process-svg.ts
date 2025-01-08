@@ -64,6 +64,7 @@ function removeSVGElement(svg: string): string {
  * @returns {string}
  */
 function handleTwoTone(svg: string, names: any) {
+  const { OUTPUT_TYPE } = process.env
   if (names.style === STYLESKEY.TWOTONE) {
     // 储存color
     const colorMap = new Map()
@@ -72,9 +73,17 @@ function handleTwoTone(svg: string, names: any) {
       if (!colorMap.has(b)) {
         const size = colorMap.size
         colorMap.set(b, size)
-        return `${a}={colors[${size}]}`
+        if (OUTPUT_TYPE === 'taro') {
+          return `${a}="\${colors[${size}]}"`
+        } else {
+          return `${a}={colors[${size}]}`
+        }
       } else {
-        return `${a}={colors[${colorMap.get(b)}]}`
+        if (OUTPUT_TYPE === 'taro') {
+          return `${a}="\${colors[${colorMap.get(b)}]}"`
+        } else {
+          return `${a}={colors[${colorMap.get(b)}]}`
+        }
       }
     })
   }

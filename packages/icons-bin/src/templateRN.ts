@@ -1,10 +1,9 @@
 import { STYLESKEY } from './config'
 import { camelCase } from './utils'
 
-export const getAttrs = (names: any) => {
+export const getAttrsRN = (names: any) => {
   const { style } = names
   const baseAttrs = {
-    // xmlns: 'http://www.w3.org/2000/svg',
     width: 'size',
     height: 'size',
     viewBox: '0 0 24 24',

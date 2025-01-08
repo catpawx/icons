@@ -1,0 +1,6 @@
+export { default as ArrowRightOutlined } from './icons/arrow-right-outlined'
+export { default as CaretRightFilled } from './icons/caret-right-filled'
+export { default as FolderBlueMultiTone } from './icons/folder-blue-multi-tone'
+export { default as FolderOrangeMultiTone } from './icons/folder-orange-multi-tone'
+export { default as OverViewTwoTone } from './icons/over-view-two-tone'
+export { default as RightCircleTwoTone } from './icons/right-circle-two-tone'

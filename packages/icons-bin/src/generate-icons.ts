@@ -4,7 +4,8 @@ import path from 'path'
 import { defaultStyle, TEMP_DIR } from './config'
 import processSvg from './process-svg'
 import { getAttrs, getElementCode, getStyles, getTypes } from './template'
-import { genIconRN, getElementCodeRN } from './templateRN'
+import { genIconRN, getAttrsRN, getElementCodeRN } from './templateRN'
+import { genIconTaro, getAttrsTaro, getElementCodeTaro } from './templateTaro'
 import { copy, parseName } from './utils'
 
 interface Icon {
@@ -64,6 +65,19 @@ const attrsToString = (attrs: { [key: string]: string }) => {
     .join(' ')
 }
 
+const attrsToStringTaro = (attrs: { [key: string]: string }) => {
+  return Object.keys(attrs)
+    .map((key: any) => {
+      // should distinguish fill or stroke
+      if (key === 'fill') {
+        return key + '="${' + attrs[key] + '}"'
+      }
+
+      return key + '="' + attrs[key] + '"'
+    })
+    .join(' ')
+}
+
 /** 生成图标code */
 const generateIconCode = async ({ name }: { name: any }) => {
   const names = parseName(name, defaultStyle)
@@ -79,7 +93,14 @@ const generateIconCode = async ({ name }: { name: any }) => {
   if (OUTPUT_TYPE === 'react-native') {
     component = getElementCodeRN(
       ComponentName,
-      attrsToString(getAttrs(names)),
+      attrsToString(getAttrsRN(names)),
+      svgCode,
+    )
+  } else if (OUTPUT_TYPE === 'taro') {
+    // 如果是taro
+    component = getElementCodeTaro(
+      ComponentName,
+      attrsToStringTaro(getAttrsTaro(names)),
       svgCode,
     )
   } else {
@@ -125,6 +146,9 @@ export const copyIconsToOutput = () => {
   if (OUTPUT_TYPE === 'react-native') {
     const outputGenFile = path.join(outputDir, 'gen.tsx')
     fs.writeFileSync(outputGenFile, genIconRN(), 'utf-8')
+  } else if (OUTPUT_TYPE === 'taro') {
+    const outputGenFile = path.join(outputDir, 'gen.tsx')
+    fs.writeFileSync(outputGenFile, genIconTaro(), 'utf-8')
   } else {
     const outputStylesFile = path.join(outputDir, 'styles.ts')
     const outputTypesFile = path.join(outputDir, 'types.ts')
