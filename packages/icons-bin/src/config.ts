@@ -1,6 +1,3 @@
-// 路径参数
-export const PATH_LIST = ['icon-react']
-
 // 默认的图标样式
 export const STYLESKEY = {
   OUTLINED: 'outlined',

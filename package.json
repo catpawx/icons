@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@catpawx/commitlint-config-preset": "^0.1.0",
-    "@catpawx/eslint-config-preset": "^2.0.1",
+    "@catpawx/eslint-config-preset": "^2.0.0",
     "@catpawx/prettier-config-preset": "^2.0.0",
     "@commitlint/cli": "^19.3.0",
     "@rollup/plugin-commonjs": "^25.0.7",

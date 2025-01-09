@@ -12,6 +12,7 @@ module.exports = [
       file: './packages/icons-bin/dist/index.cjs',
       format: 'cjs',
       sourcemap: true,
+      banner: '#!/usr/bin/env node',
     },
     plugins: [
       typescript({
