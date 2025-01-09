@@ -157,7 +157,7 @@ export const copyIconsToOutput = () => {
   }
 
   // 删除临时目录
-  // fs.rmSync(tempDir, { recursive: true })
+  fs.rmSync(tempDir, { recursive: true })
 }
 
 /** 生成图标 */

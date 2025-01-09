@@ -97,11 +97,19 @@ function handleTwoTone(svg: string, names: any) {
  * @param {Promise<string>}
  */
 async function processSvg(svg: string, names: any) {
+  const { OUTPUT_TYPE } = process.env
   const optimized = await optimize(svg, names)
     .then(removeSVGElement)
-    .then(svg =>
-      svg.replace(/([a-z]+)-([a-z]+)=/g, (_, a, b) => `${a}${camelCase(b)}=`),
-    )
+    .then(svg => {
+      // taro不支持驼峰
+      if (OUTPUT_TYPE !== 'taro') {
+        return svg.replace(
+          /([a-z]+)-([a-z]+)=/g,
+          (_, a, b) => `${a}${camelCase(b)}=`,
+        )
+      }
+      return svg
+    })
     .then(svg => {
       // 处理two-tone图标
       return handleTwoTone(svg, names)

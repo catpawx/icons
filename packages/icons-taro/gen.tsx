@@ -43,7 +43,7 @@ const defaultDisabledStyle: React.CSSProperties = {
 export const genIcon = (render: IconRender): React.FC<IconCommonProps> => {
   return memo(
     ({
-      size = '32px',
+      size = '16px',
       color = '#1677ff',
       colors = [color, '#1677ff33'],
       disabled,
@@ -60,7 +60,7 @@ export const genIcon = (render: IconRender): React.FC<IconCommonProps> => {
             width: size,
             height: size,
             backgroundImage:
-              "url('data:image/svg+xml, " +
+              "url('data:image/svg+xml;charset=utf8," +
               encodeURIComponent(render({ color, colors })) +
               "')",
             ...(disabled ? defaultDisabledStyle : undefined),
