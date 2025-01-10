@@ -31,8 +31,8 @@ jobs:
           git config --global credential.helper store
           echo "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" > ~/.git-credentials
           git config --global credential.helper store
-          npx lerna version --conventional-commits --exact
-          npx lerna publish from-package
+          npx lerna version --conventional-commits --exact --yes 
+          npx lerna publish from-package --yes
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push --follow-tags
           git remote set-url origin https://github.com/${GITHUB_REPOSITORY}.git
