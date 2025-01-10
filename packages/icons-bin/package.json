@@ -1,6 +1,6 @@
 {
   "name": "@catpawx/icons-bin",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "🐾 猫爪联盟前端团队 icons-bin",
   "bin": {
     "cpx-icons": "dist/index.cjs"
@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "clean":"npx rimraf dist"
+    "clean": "npx rimraf dist"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
