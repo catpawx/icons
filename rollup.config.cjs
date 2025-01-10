@@ -17,31 +17,38 @@ function output(path) {
       file: `./packages/${path}/dist/index.cjs`,
       format: 'cjs',
       sourcemap: true,
+      banner: '#!/usr/bin/env node',
     })
   } else {
     output.push({
       dir: `./packages/${path}/dist`,
       format: 'es', // 指定输出格式为 ES Module
       sourcemap: true, // 生成 source maps
-      // preserveModules: true, // 保留模块结构
+      preserveModules: true, // 保留模块结构
     })
   }
   return [
     {
-      input: [`./packages/${path}/src/index.ts`],
+      input: [`./packages/${path}/index.ts`],
       output,
       plugins: [
         typescript({
           tsconfig: './tsconfig.json',
-          // declarationDir: `./packages/${path}/dist/types`,
         }),
         resolve(),
         commonjs(),
         json(),
       ],
+      external: [
+        'lodash',
+        'react',
+        'react-native',
+        'react-native-svg',
+        '@tarojs/components',
+      ],
     },
     {
-      input: `./packages/${path}/src/index.ts`,
+      input: `./packages/${path}/index.ts`,
       output: [{ file: `./packages/${path}/dist/index.d.ts`, format: 'esm' }],
       plugins: [dts()],
     },

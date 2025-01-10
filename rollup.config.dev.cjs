@@ -7,7 +7,7 @@ const dts = require('rollup-plugin-dts').default
 
 module.exports = [
   {
-    input: ['./packages/icons-bin/src/index.ts'],
+    input: ['./packages/icons-bin/index.ts'],
     output: {
       file: './packages/icons-bin/dist/index.cjs',
       format: 'cjs',
@@ -25,7 +25,7 @@ module.exports = [
     ],
   },
   {
-    input: './packages/icons-bin/src/index.ts',
+    input: './packages/icons-bin/index.ts',
     output: [{ file: './packages/icons-bin/dist/index.d.ts', format: 'esm' }],
     plugins: [dts()],
   },

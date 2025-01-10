@@ -1,0 +1,46 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+
+# on:
+#   workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup yarn
+        uses: yarn/action-setup@v4
+        with:
+          version: 8
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: yarn
+      - name: Install dependencies
+        run: yarn
+        # lerna发布
+      - name: Release
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global credential.helper store
+          echo "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" > ~/.git-credentials
+          git config --global credential.helper store
+          npx lerna version --conventional-commits --exact
+          npx lerna publish from-package
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push --follow-tags
+          git remote set-url origin https://github.com/${GITHUB_REPOSITORY}.git
+          echo 🤘 release complete
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

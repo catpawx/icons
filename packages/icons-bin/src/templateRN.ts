@@ -89,9 +89,7 @@ export const getPropsStrRN = (ComponentName: string) => {
 /** genIcon */
 export const genIconRN = () => {
   return `
-import isNil from 'lodash/isNil'
-import omit from 'lodash/omit'
-import pick from 'lodash/pick'
+import { isNil, omit, pick } from 'lodash'
 import React, { memo } from 'react'
 import type {
   ColorValue,

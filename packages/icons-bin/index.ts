@@ -5,8 +5,8 @@ import minimist from 'minimist'
 import colors from 'picocolors'
 import prompts from 'prompts'
 
-import { fetchSvg } from './fetch-svg'
-import { generateIcons } from './generate-icons'
+import { fetchSvg } from './src/fetch-svg'
+import { generateIcons } from './src/generate-icons'
 const { reset, red, yellow, magenta } = colors
 
 const argv = minimist<{
