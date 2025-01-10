@@ -29,7 +29,7 @@
     "build:taro": "cd packages/icons-taro && father build",
     "ncu": "npx npm-check-updates -u -x lerna",
     "dev": "dumi dev",
-    "doc:github-build": "cross-env PUBLIC_PATH=icon/ dumi build",
+    "doc:github-build": "cross-env PUBLIC_PATH=icons/ dumi build",
     "commit": "git-cz",
     "clean": "lerna clean --yes && npx rimraf node_modules",
     "l-version": "lerna version",
