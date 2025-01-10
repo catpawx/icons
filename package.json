@@ -23,7 +23,7 @@
     "lint": "eslint packages --fix --ext .ts,.tsx",
     "lint:ts": "tsc --noEmit && eslint packages --ext .ts,.tsx",
     "prettier": "prettier --write 'packages/**/*.{js,json,yml,yaml,css,scss,less,ts,tsx,md}'",
-    "build:debug": "rollup -c ./rollup.config.dev.cjs",
+    "build:bin": "rollup -c ./rollup.config.dev.cjs",
     "build:web": "cd packages/icons-react && father build",
     "build:app": "cd packages/icons-react-native && father build",
     "build:taro": "cd packages/icons-taro && father build",

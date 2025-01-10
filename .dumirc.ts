@@ -5,7 +5,7 @@ const repo = process.env.PUBLIC_PATH || ''
 const publicPath = repo ? `/${repo}` : '/'
 
 export default defineConfig({
-  favicons: ['https://avatars.githubusercontent.com/u/162661916'],
+  favicons: ['https://avatars.githubusercontent.com/u/173867555'],
   base: `/${repo}`,
   publicPath,
   outputPath: 'docs-dist',
@@ -41,10 +41,10 @@ export default defineConfig({
   ],
   themeConfig: {
     name: '图标库',
-    logo: 'https://avatars.githubusercontent.com/u/162661916',
+    logo: 'https://avatars.githubusercontent.com/u/173867555',
     footer: false,
     socialLinks: {
-      github: 'https://github.com/24jieqi/icon',
+      github: 'https://github.com/catpawx/icons',
     },
     nav: [
       {

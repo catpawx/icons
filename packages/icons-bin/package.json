@@ -45,6 +45,7 @@
     "uppercamelcase": "^3.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4"
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9"
   }
 }

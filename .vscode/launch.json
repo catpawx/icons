@@ -10,7 +10,7 @@
       "name": "调试icons-bin",
       "cwd": "${workspaceFolder}/packages/icons-bin",
       "program": "${workspaceFolder}/packages/icons-bin/src/index.ts",
-      "preLaunchTask": "npm run build:debug",
+      "preLaunchTask": "npm run build:bin",
       "outFiles": ["${workspaceFolder}/packages/icons-bin/dist/**/*.cjs"],
       "console": "integratedTerminal"
     }
