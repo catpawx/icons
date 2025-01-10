@@ -23,6 +23,8 @@ dist-ssr
 *.sw?
 
 .env*
+.mocks/
+docs-dist
 .dumi/tmp
 .dumi/tmp-test
 .dumi/tmp-production
