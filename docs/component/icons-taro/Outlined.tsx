@@ -10,7 +10,7 @@ const icons: { name: string; Component: any }[] = Object.keys(ICONS)
   })
 
 const Outlined: React.FC = () => {
-  return <Code icons={icons} currentColor="#ff4d4f" />
+  return <Code icons={icons} />
 }
 
 export default Outlined

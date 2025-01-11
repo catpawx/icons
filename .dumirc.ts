@@ -13,8 +13,7 @@ export default defineConfig({
     docDirs: ['docs'],
   },
   theme: {
-    '@c-primary': '#0065FE',
-    '@s-content-width': '1800px',
+    '@c-primary': '#1677ff',
   },
   mfsu: false,
   alias: {
@@ -45,7 +44,7 @@ export default defineConfig({
   themeConfig: {
     name: '图标库',
     logo: 'https://avatars.githubusercontent.com/u/173867555',
-    footer: false,
+    // footer: false,
     socialLinks: {
       github: 'https://github.com/catpawx/icons',
     },
@@ -56,7 +55,11 @@ export default defineConfig({
       },
       {
         title: 'Icon',
-        link: '/component/icon-react',
+        link: '/component/icons-react',
+      },
+      {
+        title: '脚本',
+        link: '/plugins/icons-bin',
       },
     ],
   },

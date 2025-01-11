@@ -25,8 +25,10 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "paths": {
-      "@catpawx/*": ["packages/*"]
-      // "@catpawx/icons-react": ["./packages/icons-react"]
+      "@catpawx/*": ["packages/*"],
+      "@catpawx/icons-react": ["./packages/icons-react/src"],
+      "@catpawx/icons-react-native": ["./packages/icons-react-native/src"],
+      "@catpawx/icons-taro": ["./packages/icons-taro/src"]
     }
   }
 }

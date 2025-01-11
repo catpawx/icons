@@ -46,7 +46,7 @@ yarn add babel-plugin-import --dev
       "import",
       {
         "libraryName": "@catpawx/icons-react",
-        "libraryDirectory": "es" // JavaScript，如果是 TypeScript 可以直接使用 `src`
+        "libraryDirectory": "dist"
       }
     ]
   ]
@@ -60,10 +60,10 @@ import React from 'react'
 import { SuccessOutline } from '@catpawx/icons-react'
 
 const App: React.FC = () => {
-  // @catpawx/icons-react-icon 的组件则是 <SuccessOutline color="#098" size={20} />
+  // @catpawx/icons-react 的组件则是 <ArrowRightOutlined color="#1677ff" size={20} />
   return (
-    <span style={{ color: '#098', fontSize: 20 }}>
-      <SuccessOutline />
+    <span style={{ color: '#1677ff', fontSize: 20 }}>
+      <ArrowRightOutlined />
     </span>
   )
 }
