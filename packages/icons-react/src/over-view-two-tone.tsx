@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { IconProps } from '../types';
-import { spanStyles } from '../styles';
+import { IconProps } from './types';
+import { spanStyles } from './styles';
 
 const OverViewTwoTone:React.FC<IconProps> = (props) => {
   let { color='#1677ff', size='1em', style={},colors=[color,'#1677ff33'], rotate=0, ...otherProps } = props;

@@ -5,8 +5,8 @@ import minimist from 'minimist'
 import colors from 'picocolors'
 import prompts from 'prompts'
 
-import { fetchSvg } from './src/fetch-svg'
-import { generateIcons } from './src/generate-icons'
+import { fetchSvg } from './fetch-svg'
+import { generateIcons } from './generate-icons'
 const { reset, red, yellow, magenta } = colors
 
 const argv = minimist<{
@@ -108,6 +108,7 @@ async function init() {
           type: OUTPUT_DIR ? null : 'text',
           name: 'OUTPUT_DIR',
           message: reset('请输入OUTPUT_DIR:'),
+          initial: 'icons',
           onState: state => {
             OUTPUT_DIR = state.value
           },

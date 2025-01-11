@@ -15,7 +15,8 @@
     "dist"
   ],
   "scripts": {
-    "clean": "npx rimraf dist"
+    "clean": "npx rimraf dist",
+    "gen:icons": "cpx-icons"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

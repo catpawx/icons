@@ -75,7 +75,7 @@ export async function fetchSvg() {
         if (pathName === undefined) {
           check(c)
         } else {
-          if (c.name.includes(pathName)) {
+          if (c.name === pathName) {
             const pName = PATH_LIST.shift()
             c.children.forEach((c: any) => {
               pathFilter(c, pName)

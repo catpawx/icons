@@ -29,7 +29,7 @@ function output(path) {
   }
   return [
     {
-      input: [`./packages/${path}/index.ts`],
+      input: [`./packages/${path}/src/index.ts`],
       output,
       plugins: [
         typescript({
@@ -48,7 +48,7 @@ function output(path) {
       ],
     },
     {
-      input: `./packages/${path}/index.ts`,
+      input: `./packages/${path}/src/index.ts`,
       output: [{ file: `./packages/${path}/dist/index.d.ts`, format: 'esm' }],
       plugins: [dts()],
     },

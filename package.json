@@ -30,6 +30,7 @@
     "commit": "git-cz",
     "clean": "lerna clean --yes && npx rimraf node_modules",
     "clean:dist": "lerna run clean",
+    "gen:icons": "lerna run gen:icons",
     "build:bin": "rollup -c ./rollup.config.dev.cjs",
     "build": "rollup -c ./rollup.config.cjs",
     "l-changed": "lerna changed",

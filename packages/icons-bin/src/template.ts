@@ -37,8 +37,8 @@ export const getElementCode = (
   const { newSvgCode, idMapToNewIdStr } = generateDefsId(svgCode)
   return `/* eslint-disable */
 import React from 'react';
-import { IconProps } from '../types';
-import { spanStyles } from '../styles';
+import { IconProps } from './types';
+import { spanStyles } from './styles';
 
 const ${ComponentName}:React.FC<IconProps> = (props) => {
   ${getPropsStr(ComponentName)}
@@ -87,7 +87,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   className?: string
   colors?: string[]
 }
-  `
+`
 }
 
 /** 处理存在defs id引用的情况，他在与tabs等组件使用时id相同会有bug */

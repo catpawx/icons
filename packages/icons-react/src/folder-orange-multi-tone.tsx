@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { IconProps } from '../types';
-import { spanStyles } from '../styles';
+import { IconProps } from './types';
+import { spanStyles } from './styles';
 
 const FolderOrangeMultiTone:React.FC<IconProps> = (props) => {
   let { size='1em', style={}, rotate=0, ...otherProps } = props;

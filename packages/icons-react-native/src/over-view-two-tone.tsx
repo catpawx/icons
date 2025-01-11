@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
  import {Svg, Path } from 'react-native-svg'
-import { genIcon } from '../gen'
+import { genIcon } from './gen'
 
 const OverViewTwoTone = genIcon(({ size, colors }, props) => {
 

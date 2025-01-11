@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { genIcon } from '../gen'
+import { genIcon } from './gen'
 
 const FolderBlueMultiTone = genIcon(() => {
 

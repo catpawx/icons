@@ -37,7 +37,7 @@ export const getElementCodeRN = (
   return `/* eslint-disable */
 import React from 'react';
  ${importStrRN}
-import { genIcon } from '../gen'
+import { genIcon } from './gen'
 
 const ${ComponentName} = genIcon((${getPropsStrRN(ComponentName)}, props) => {
 
@@ -88,7 +88,8 @@ export const getPropsStrRN = (ComponentName: string) => {
 
 /** genIcon */
 export const genIconRN = () => {
-  return `
+  return `// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { isNil, omit, pick } from 'lodash'
 import React, { memo } from 'react'
 import type {

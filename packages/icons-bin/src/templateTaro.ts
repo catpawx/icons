@@ -33,7 +33,7 @@ export const getElementCodeTaro = (
   svgCode: string,
 ) => {
   return `/* eslint-disable */
-import { genIcon } from '../gen'
+import { genIcon } from './gen'
 
 const ${ComponentName} = genIcon((${getPropsStrTaro(ComponentName)}) => {
 

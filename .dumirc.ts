@@ -21,12 +21,15 @@ export default defineConfig({
     'react-native$': 'react-native-web',
     'react-native-svg$': 'react-native-svg/src/ReactNativeSVG.web',
     '@tarojs/components': path.resolve(__dirname, './mock/taro.tsx'),
-    '@catpawx/icons-react': path.resolve(__dirname, './packages/icons-react'),
+    '@catpawx/icons-react': path.resolve(
+      __dirname,
+      './packages/icons-react/src',
+    ),
     '@catpawx/icons-react-native': path.resolve(
       __dirname,
-      './packages/icons-react-native',
+      './packages/icons-react-native/src',
     ),
-    '@catpawx/icons-taro': path.resolve(__dirname, './packages/icons-taro'),
+    '@catpawx/icons-taro': path.resolve(__dirname, './packages/icons-taro/src'),
   },
   extraBabelPlugins: [
     [

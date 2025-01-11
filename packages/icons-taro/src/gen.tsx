@@ -60,7 +60,7 @@ export const genIcon = (render: IconRender): React.FC<IconCommonProps> => {
             width: size,
             height: size,
             backgroundImage:
-              "url('data:image/svg+xml;charset=utf8," +
+              "url('data:image/svg+xml, " +
               encodeURIComponent(render({ color, colors })) +
               "')",
             ...(disabled ? defaultDisabledStyle : undefined),

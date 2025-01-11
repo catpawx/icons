@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
  import {Svg, Path, Defs, Pattern, Use, Image } from 'react-native-svg'
-import { genIcon } from '../gen'
+import { genIcon } from './gen'
 
 const FolderBlueMultiTone = genIcon(({ size }, props) => {
 

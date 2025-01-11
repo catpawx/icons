@@ -23,13 +23,13 @@ const rootDir = path.resolve()
 
 /** 整个操作的临时目录 */
 const tempDir = path.join(rootDir, TEMP_DIR)
-/** 图标组件目录 */
+/** 图标组件临时目录 */
 const iconsDir = path.join(tempDir, 'icons')
-/** svg 目录 */
+/** svg 临时目录 */
 const svgsDir = path.join(tempDir, 'svg')
-/** 生成的 index.ts 文件 */
+/** 生成的 index.ts 临时文件 */
 const iconsIndexFile = path.join(tempDir, 'index.ts')
-/** 生成的 data.json 文件 */
+/** 生成的 data.json 临时文件 */
 const iconsJsonFile = path.join(tempDir, 'data.json')
 
 /** 生成 icons.js  icons.d.ts 文件 */
@@ -85,6 +85,7 @@ const generateIconCode = async ({ name }: { name: any }) => {
   const location = path.join(svgsDir, `${names.name}.svg`)
   const destination = path.join(iconsDir, `${names.name}.tsx`)
   const code: any = fs.readFileSync(location)
+  // 处理svg
   const svgCode = await processSvg(code, names)
   const ComponentName = names.componentName
   // 如果是react-native
@@ -125,7 +126,7 @@ const appendToIconsIndex = ({
   ComponentName: string
   name: string
 }) => {
-  const exportString = `export { default as ${ComponentName} } from './icons/${name}';\r\n`
+  const exportString = `export { default as ${ComponentName} } from './${name}';\r\n`
   fs.appendFileSync(iconsIndexFile, exportString, 'utf-8')
 }
 
@@ -141,7 +142,7 @@ export const copyIconsToOutput = () => {
   const outputDir = path.join(rootDir, OUTPUT_DIR || '')
   const outputiconsIndexFile = path.join(outputDir, 'index.ts')
 
-  copy(iconsDir, path.join(outputDir, 'icons'))
+  copy(iconsDir, outputDir)
   copy(iconsIndexFile, outputiconsIndexFile)
   if (OUTPUT_TYPE === 'react-native') {
     const outputGenFile = path.join(outputDir, 'gen.tsx')
@@ -163,6 +164,7 @@ export const copyIconsToOutput = () => {
 /** 生成图标 */
 export const generateIcons = () => {
   const icons: { [key: string]: Icon } = loadLocalJson()
+  // 生成临时目录
   generateIconsIndex()
 
   const tasks = Object.keys(icons)

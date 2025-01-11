@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { IconProps } from '../types';
-import { spanStyles } from '../styles';
+import { IconProps } from './types';
+import { spanStyles } from './styles';
 
 const CaretRightFilled:React.FC<IconProps> = (props) => {
   let { color='currentColor', size='1em', style={}, rotate=0, ...otherProps } = props;
