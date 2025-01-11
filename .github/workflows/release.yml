@@ -41,9 +41,7 @@ jobs:
       - name: Version
         run: |
           lerna version --conventional-commits --exact --yes
-      - name: 'NPM Identity'
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+
       - name: Release
         run: |
           lerna publish from-package --yes --no-verify-access
