@@ -31,7 +31,7 @@
     "clean": "lerna clean --yes && npx rimraf node_modules",
     "clean:dist": "lerna run clean",
     "build:bin": "rollup -c ./rollup.config.dev.cjs",
-    "build": "yarn clean:dist && rollup -c ./rollup.config.cjs",
+    "build": "rollup -c ./rollup.config.cjs",
     "l-changed": "lerna changed",
     "l-version": "lerna version",
     "l-publish": "lerna publish",
