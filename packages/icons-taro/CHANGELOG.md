@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/catpawx/icons/compare/@catpawx/icons-taro@0.1.0...@catpawx/icons-taro@0.2.0) (2025-01-11)
+
+### Features
+
+- **icons-bin,icons-react,icons-react-native,icons-taro:** 完善并打包 ([9a4f36f](https://github.com/catpawx/icons/commit/9a4f36fb9eceb86fd5cceba8c6d6e09245e93366))
+
 # 0.1.0 (2025-01-10)
 
 ### Features

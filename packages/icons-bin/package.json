@@ -1,6 +1,6 @@
 {
   "name": "@catpawx/icons-bin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "🐾 猫爪联盟前端团队 icons-bin",
   "bin": {
     "cpx-icons": "dist/index.cjs"
