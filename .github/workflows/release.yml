@@ -10,6 +10,12 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,20 +32,23 @@ jobs:
       - name: Install dependencies
         run: yarn
         # lerna发布
-      - name: Release
+      - name: Identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global credential.helper store
           echo "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" > ~/.git-credentials
           git config --global credential.helper store
-          lerna version --conventional-commits --exact --yes 
+      - name: Version
+        run: |
+          lerna version --conventional-commits --exact --yes
+      - name: 'NPM Identity'
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - name: Release
+        run: |
           lerna publish from-package --yes --no-verify-access
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push --follow-tags
           git remote set-url origin https://github.com/${GITHUB_REPOSITORY}.git
           echo 🤘 release complete
-        id: release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
