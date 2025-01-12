@@ -16,7 +16,7 @@ nav:
 [![](https://img.shields.io/badge/language-typescript-blue.svg)](https://www.typescriptlang.org/)
 [![install size](https://packagephobia.com/badge?p=@catpawx/icons-taro)](https://packagephobia.com/result?p=@catpawx/icons-taro)
 
-<!-- ```tsx
+```tsx
 /**
  * defaultShowCode: true
  */
@@ -27,10 +27,12 @@ export default () => {
   return (
     <>
       <RightOutlined />
+      <RightOutlined color="red" size={30} />
+      <RightCircleTwoTone colors={['#722ed1', '#efdbff']} size={40} />
     </>
   )
 }
-``` -->
+```
 
 ## 线框风格
 

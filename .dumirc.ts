@@ -13,7 +13,7 @@ export default defineConfig({
     docDirs: ['docs'],
   },
   theme: {
-    '@c-primary': '#1677ff',
+    '@c-primary': '#722ed1',
   },
   mfsu: false,
   alias: {

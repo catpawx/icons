@@ -16,28 +16,24 @@ nav:
 [![](https://img.shields.io/badge/language-typescript-blue.svg)](https://www.typescriptlang.org/)
 [![install size](https://packagephobia.com/badge?p=@catpawx/icons-react-native)](https://packagephobia.com/result?p=@catpawx/icons-react-native)
 
-<!-- ```tsx
+```tsx
 /**
  * defaultShowCode: true
  */
 import React from 'react'
 import { View } from 'react-native'
-import { RightOutlined } from '@catpawx/icons-react-native'
+import { RightOutlined, RightCircleTwoTone } from '@catpawx/icons-react-native'
 
 export default () => {
   return (
     <View style={{ flexDirection: 'row' }}>
-      <RightOutlined
-        color="#987"
-        size={40}
-        onPress={() => {
-          console.log('onPress1')
-        }}
-      />
+      <RightOutlined />
+      <RightOutlined color="red" size={30} />
+      <RightCircleTwoTone colors={['#722ed1', '#efdbff']} size={40} />
     </View>
   )
 }
-``` -->
+```
 
 ## 线框风格
 

@@ -64,9 +64,8 @@ export const getPropsStrTaro = (ComponentName: string) => {
 
 /** genIcon */
 export const genIconTaro = () => {
-  return `
+  return `import type { ViewProps } from '@tarojs/components'
 import { View } from '@tarojs/components'
-import type { ViewProps } from '@tarojs/components'
 import React, { memo } from 'react'
 
 export interface IconCommonProps extends Omit<ViewProps, 'children' | 'style'> {

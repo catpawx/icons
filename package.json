@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "private": true,
+  "type": "module",
   "keywords": [
     "icons"
   ],
